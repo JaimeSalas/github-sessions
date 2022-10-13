@@ -13,20 +13,17 @@ on:
     #   - "hangman-api/**"
 
 jobs:
-  build-test:
+  build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [14.x, 15.x, 16.x]
-        os: [windows, linux]
+    # strategy:
+    #   matrix:
+    #     node-version: [14.x, 15.x, 16.x]
+        # os: [windows, linux]
         # arch: [ARM, AMD]
 
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
       - name: inspect
         run: |
           ls -al
@@ -35,12 +32,20 @@ jobs:
           node -v
           docker version
           docker compose version
-      - name: build and test
+      - name: build
         working-directory: ./hangman-api
         run: |
           npm ci
           npm run build --if-present
-          ls ./dist
+  
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: test
+        working-directory: ./hangman-api
+        run: |
+          npm ci 
           npm test
 
-# 2X3 - [[1, 2, 3], [4, 5, 6]], -> (1,4) (1,5) (1,6)
