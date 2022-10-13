@@ -1,0 +1,12 @@
+{
+    "name": "yu",
+    "complex": {
+        "foo": "boo"
+    },
+
+    "list": [
+        "hola",
+        "adios",
+        7
+    ]
+}

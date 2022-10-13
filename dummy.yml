@@ -1,0 +1,23 @@
+name: yu
+
+complex:
+  foo: boo
+  doo: 45.0
+
+list: [hola, adios, 7]
+
+list-complex: 
+  - complex:
+      foo: boo
+      doo: 45.0
+  - complex:
+      foo: boo
+      doo: 45.0
+  - complex:
+      foo: boo
+      doo: 45.0
+  - complex:
+      foo: boo
+      doo: 45.0
+      other: 
+        
