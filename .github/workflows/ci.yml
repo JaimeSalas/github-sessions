@@ -4,20 +4,29 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "hangman-api/**"
+    # paths:
+    #   - "hangman-api/**"
   pull_request:
     branches:
       - main
-    paths:
-      - "hangman-api/**"
+    # paths:
+    #   - "hangman-api/**"
 
 jobs:
   build-test:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version: [14.x, 15.x, 16.x]
+        os: [windows, linux]
+        # arch: [ARM, AMD]
+
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
       - name: inspect
         run: |
           ls -al
@@ -33,3 +42,5 @@ jobs:
           npm run build --if-present
           ls ./dist
           npm test
+
+# 2X3 - [[1, 2, 3], [4, 5, 6]], -> (1,4) (1,5) (1,6)
