@@ -22,4 +22,3 @@ jobs:
           node -v
           docker version
           docker compose version
-          java -v
